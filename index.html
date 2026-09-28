@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="ka" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N·A·24 — 24 ოქტომბრის დროით — სიყვარული</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Serif Georgian & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Georgian:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        parchment: '#F7F4EE',
+                        'parchment-dark': '#EFECE4',
+                        forest: '#1B3B2B',
+                        'forest-light': '#2A523E',
+                        charcoal: '#1A1A1A',
+                        'charcoal-muted': '#4A4A4A',
+                        gold: '#C5A059',
+                        'gold-light': '#E2C792',
+                        wine: '#6B2D38',
+                        'wine-light': '#8C3D4B'
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif Georgian"', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Cartographic & Editorial Paper Aesthetics */
+        body {
+            background-color: #F7F4EE;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(#1A1A1A 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            background-color: #F7F4EE;
+        }
+
+        .bg-paper {
+            background-color: #F7F4EE;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .font-georgian-serif {
+            font-family: 'Noto Serif Georgian', serif;
+        }
+
+        /* Cartographic line styles */
+        .carto-line {
+            background-image: repeating-linear-gradient(90deg, #C5A059, #C5A059 6px, transparent 6px, transparent 12px);
+        }
+
+        .carto-border {
+            border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F4EE;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1B3B2B;
+            border-radius: 3px;
+        }
+
+        /* Subtle Fade In animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Stamp animation */
+        .stamp-effect {
+            border: 2px dashed #C5A059;
+            transform: rotate(-3deg);
+        }
+
+        /* Pulse ring for active map dots */
+        @keyframes mapPulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(27, 59, 43, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(27, 59, 43, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(27, 59, 43, 0); }
+        }
+        .map-marker-pulse {
+            animation: mapPulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-paper min-h-screen flex flex-col justify-between selection:bg-gold selection:text-white">
+
+    <!-- INITIAL LOADING SCREEN -->
+    <div id="loading-screen" class="fixed inset-0 z-50 bg-forest text-parchment flex flex-col items-center justify-center p-6 transition-opacity duration-700">
+        <div class="text-center max-w-md space-y-6">
+            <!-- Archival Logo Stamp -->
+            <div class="w-20 h-20 mx-auto rounded-full border-2 border-gold flex items-center justify-center p-2 relative">
+                <div class="w-full h-full rounded-full border border-gold/40 flex items-center justify-center">
+                    <span class="font-georgian-serif font-bold text-xl tracking-widest text-gold">N·A·24</span>
+                </div>
+                <i class="fa-solid font-mono text-[10px] text-gold/70 absolute -top-2 bg-forest px-1">24.10.2026</i>
+            </div>
+            
+            <div class="space-y-2">
+                <h1 class="font-georgian-serif text-2xl font-light text-parchment tracking-wide">
+                    N·A·24
+                </h1>
+                <p class="text-xs uppercase tracking-widest text-gold/90 font-medium">
+                    თბილისი — ანანური — ფასანაური — გუდაური — ყაზბეგი
+                </p>
+            </div>
+
+            <div class="w-32 h-[1px] bg-gold/30 mx-auto relative overflow-hidden">
+                <div class="w-full h-full bg-gold absolute left-0 top-0 -translate-x-full animate-[shimmer_1.5s_infinite]"></div>
+            </div>
+
+            <p class="text-xs text-parchment/60 font-serif italic tracking-wider animate-pulse">
+                მოგზაურობა იწყება...
+            </p>
+        </div>
+    </div>
+
+    <!-- GLOBAL HEADER -->
+    <header class="sticky top-0 z-40 bg-parchment/90 backdrop-blur-md border-b border-gold/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Monogram -->
+            <a href="#/" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-gold/60 flex items-center justify-center bg-parchment group-hover:border-forest transition-colors">
+                    <span class="font-georgian-serif font-bold text-sm tracking-wider text-forest">N·A</span>
+                </div>
+                <div>
+                    <span class="font-georgian-serif font-bold text-lg tracking-wider block leading-none text-charcoal">N·A·24</span>
+                    <span class="text-[10px] text-wine font-medium tracking-tight">24 ოქტომბრის დროით</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-charcoal-muted">
+                <a href="#/" class="nav-link hover:text-forest transition-colors py-1" data-route="/">მთავარი</a>
+                <a href="#/expedition" class="nav-link hover:text-forest transition-colors py-1" data-route="/expedition">ექსპედიცია</a>
+                <a href="#/map" class="nav-link hover:text-forest transition-colors py-1" data-route="/map">რუკა</a>
+                <a href="#/24" class="nav-link hover:text-forest transition-colors py-1 font-semibold text-wine" data-route="/24">24 — შემომთავაზე</a>
+                <a href="#/trace" class="nav-link hover:text-forest transition-colors py-1" data-route="/trace">დატოვე შენი კვალი</a>
+                <a href="#/passport" class="nav-link hover:text-forest transition-colors py-1" data-route="/passport">პასპორტი</a>
+                <a href="#/archive" class="nav-link hover:text-forest transition-colors py-1" data-route="/archive">არქივი</a>
+            </nav>
+
+            <!-- Date Stamp & Action Badge -->
+            <div class="hidden lg:flex items-center gap-4">
+                <div class="px-3 py-1 rounded-full border border-gold/40 bg-parchment-dark text-xs font-mono text-forest flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-gold"></i>
+                    <span>24.10.2026</span>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-charcoal hover:text-forest focus:outline-none" aria-label="მენიუს გახსნა">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Header Dropdown -->
+        <div id="mobile-dropdown" class="hidden md:hidden border-b border-gold/20 bg-parchment px-4 pt-2 pb-6 space-y-3">
+            <a href="#/" class="block text-sm font-medium text-charcoal hover:text-forest py-2 border-b border-gold/10">მთავარი</a>
+            <a href="#/expedition" class="block text-sm font-medium text-charcoal hover:text-forest py-2 border-b border-gold/10">ექსპედიცია</a>
+            <a href="#/map" class="block text-sm font-medium text-charcoal hover:text-forest py-2 border-b border-gold/10">რუკა</a>
+            <a href="#/24" class="block text-sm font-semibold text-wine hover:text-forest py-2 border-b border-gold/10">24 — შემომთავაზე</a>
+            <a href="#/trace" class="block text-sm font-medium text-charcoal hover:text-forest py-2 border-b border-gold/10">დატოვე შენი კვალი</a>
+            <a href="#/calendar" class="block text-sm font-medium text-charcoal hover:text-forest py-2 border-b border-gold/10">კალენდარი</a>
+            <a href="#/passport" class="block text-sm font-medium text-charcoal hover:text-forest py-2 border-b border-gold/10">პასპორტი</a>
+            <a href="#/archive" class="block text-sm font-medium text-charcoal hover:text-forest py-2">არქივი</a>
+        </div>
+    </header>
+
+    <!-- MAIN APP ROUTER CONTENT CONTAINER -->
+    <main id="app-root" class="flex-grow min-h-[calc(100vh-160px)]">
+        <!-- Views will be injected dynamically via JavaScript -->
+    </main>
+
+    <!-- MOBILE STICKY BOTTOM BAR -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-parchment/95 backdrop-blur-lg border-t border-gold/30 px-4 py-2 shadow-lg">
+        <div class="flex justify-around items-center text-center">
+            <a href="#/" class="flex flex-col items-center text-xs text-charcoal hover:text-forest p-1">
+                <i class="fa-solid fa-compass text-base mb-0.5"></i>
+                <span>მთავარი</span>
+            </a>
+            <a href="#/map" class="flex flex-col items-center text-xs text-charcoal hover:text-forest p-1">
+                <i class="fa-solid fa-map-location-dot text-base mb-0.5"></i>
+                <span>რუკა</span>
+            </a>
+            <a href="#/24" class="flex flex-col items-center text-xs text-wine font-bold p-1">
+                <div class="w-8 h-8 rounded-full bg-wine text-parchment flex items-center justify-center text-xs -mt-3 shadow-md border-2 border-parchment">24</div>
+                <span>შეთავაზება</span>
+            </a>
+            <a href="#/trace" class="flex flex-col items-center text-xs text-charcoal hover:text-forest p-1">
+                <i class="fa-solid fa-feather-pointed text-base mb-0.5"></i>
+                <span>კვალი</span>
+            </a>
+            <a href="#/archive" class="flex flex-col items-center text-xs text-charcoal hover:text-forest p-1">
+                <i class="fa-solid fa-box-archive text-base mb-0.5"></i>
+                <span>არქივი</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- GLOBAL FOOTER -->
+    <footer class="bg-forest text-parchment pt-16 pb-24 md:pb-12 border-t border-gold/20 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gold/20">
+                <!-- Brand Info -->
+                <div class="space-y-4 md:col-span-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full border border-gold flex items-center justify-center text-gold font-serif font-bold text-base">
+                            N·A
+                        </div>
+                        <span class="font-georgian-serif font-bold text-2xl tracking-wider text-parchment">N·A·24</span>
+                    </div>
+                    <p class="font-georgian-serif italic text-gold text-lg">„24 ოქტომბრის დროით — სიყვარული“</p>
+                    <p class="text-xs text-parchment/70 max-w-sm leading-relaxed">
+                        საქართველოს პატარა ექსპედიცია. ერთი დღე, ერთი გზა, ბევრი ადამიანი და ერთი საერთო ისტორია.
+                    </p>
+                    <div class="text-xs font-mono text-gold/80 pt-2">
+                        თარიღი: 24 ოქტომბერი, 2026
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div>
+                    <h4 class="font-georgian-serif text-gold text-sm font-semibold tracking-wider uppercase mb-4">ნავიგაცია</h4>
+                    <ul class="space-y-2 text-xs text-parchment/80">
+                        <li><a href="#/" class="hover:text-gold transition-colors">მთავარი</a></li>
+                        <li><a href="#/expedition" class="hover:text-gold transition-colors">ექსპედიცია</a></li>
+                        <li><a href="#/map" class="hover:text-gold transition-colors">ინტერაქტიული რუკა</a></li>
+                        <li><a href="#/24" class="hover:text-gold transition-colors text-gold">24 — შემომთავაზე</a></li>
+                        <li><a href="#/calendar" class="hover:text-gold transition-colors">დღის კალენდარი</a></li>
+                    </ul>
+                </div>
+
+                <!-- Personal Archives & Trace -->
+                <div>
+                    <h4 class="font-georgian-serif text-gold text-sm font-semibold tracking-wider uppercase mb-4">მეხსიერება</h4>
+                    <ul class="space-y-2 text-xs text-parchment/80">
+                        <li><a href="#/trace" class="hover:text-gold transition-colors">დატოვე შენი კვალი</a></li>
+                        <li><a href="#/passport" class="hover:text-gold transition-colors">მოგზაურის პასპორტი</a></li>
+                        <li><a href="#/archive" class="hover:text-gold transition-colors">ციფრული არქივი</a></li>
+                        <li><a href="#/location/300-aragveli" class="hover:text-gold transition-colors">მარშრუტის გაჩერებები</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-parchment/50 gap-4">
+                <p>N·A·24 — „ზოგი დღე უბრალოდ გადის. ზოგი დღე ისტორიად რჩება.“</p>
+                <p class="font-serif italic text-gold/70">შექმნილია ერთი დღის დასამახსოვრებლად.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GLOBAL MODAL CONTAINER FOR VIDEO / CAPSULE -->
+    <div id="global-modal" class="fixed inset-0 z-50 hidden bg-charcoal/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-parchment border border-gold/40 max-w-2xl w-full rounded-lg shadow-2xl p-6 relative animate-fade-in max-h-[90vh] overflow-y-auto" id="modal-content">
+            <!-- Modal Header & Dynamic Body -->
+        </div>
+    </div>
+
+    <script>
+        // EXPEDITION LOCATIONS DATA MODEL
+        const LOCATIONS_DATA = [
+            {
+                id: "300-aragveli",
+                name: "300 არაგველი",
+                subtitle: "მეხსიერება",
+                coords: { x: "28%", y: "78%" },
+                time: "09:20",
+                img: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=80",
+                story: "პირველი გაჩერება. პირველი ისტორია. პირველი კვალი რუკაზე. აქ თავდადება და მეხსიერება ერთმანეთს ერწყმის.",
+                mission: "იპოვე ერთი რამ, რომელიც ამ ადგილს შენთვის განსაკუთრებულს გახდის.",
+                buttonText: "დატოვე შენი კვალი"
+            },
+            {
+                id: "ananuri",
+                name: "ანანური",
+                subtitle: "ისტორია, რომელსაც ხელით ეხები",
+                coords: { x: "36%", y: "62%" },
+                time: "10:50",
+                img: "https://images.unsplash.com/photo-1589561253898-768105ca91a8?auto=format&fit=crop&w=1200&q=80",
+                story: "ჟინვალის წყალსაცავის თავზე აღმართული ციხესიმაგრე. ადგილი, სადაც საუკუნეები ქვაშია აღბეჭდილი.",
+                mission: "იპოვე ერთი დეტალი, რომელსაც სხვებსაც მოუყვები.",
+                buttonText: "დატოვე ჩანაწერი"
+            },
+            {
+                id: "pasanauri",
+                name: "ფასანაური",
+                subtitle: "ჩემი ფესვები",
+                tag: "ოჯახური / ზეპირი გადმოცემა",
+                coords: { x: "45%", y: "48%" },
+                time: "12:50",
+                img: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
+                story: "ზოგ ადგილას სტუმრად მიდიხარ. ზოგ ადგილას — საკუთარ ისტორიაში. არაგვის ხეობა და წინაპართა ხსოვნა.",
+                mission: "გაიხსენე ისტორია, რომელიც ოჯახურ გადმოცემად იქცა.",
+                buttonText: "გააზიარე მოგონება"
+            },
+            {
+                id: "gudauri",
+                name: "გუდაური",
+                subtitle: "გაჩუმების წუთი",
+                coords: { x: "55%", y: "35%" },
+                time: "14:15",
+                img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+                story: "ზოგჯერ მოგზაურობის ყველაზე მნიშვნელოვანი ნაწილი ის არის, რასაც არ ამბობ. მთების სიჩუმე და უსასრულო სივრცე.",
+                mission: "ერთი წუთით შეჩერდი და უსმინე მთების ქარს.",
+                buttonText: "ერთი წუთით გაჩერდი"
+            },
+            {
+                id: "kazbegi",
+                name: "სტეფანწმინდა / ყაზბეგი",
+                subtitle: "საქართველოს თავზე",
+                coords: { x: "68%", y: "22%" },
+                time: "15:20",
+                img: "https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=1200&q=80",
+                story: "თუ ამინდი გვაძლევს საშუალებას, აქ ჩვენი დღის ერთ-ერთი მთავარი კადრი შეიქმნება. გერგეტის სამება და მყინვარწვერი.",
+                mission: "დაიჭირე წამი და დატოვე ერთი წინადადება.",
+                buttonText: "გადაიღე კადრი"
+            },
+            {
+                id: "dariali",
+                name: "დარიალი",
+                subtitle: "კარიბჭე",
+                coords: { x: "82%", y: "12%" },
+                time: "17:10",
+                img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+                story: "ზოგი გზა მთავრდება. ზოგი გზა უბრალოდ ახალ ისტორიად იქცევა. კლდოვანი ხეობა და დიდი ფინალის დასაწყისი.",
+                mission: "მოემზადე ფინალური შეხვედრისთვის.",
+                buttonText: "ფინალამდე"
+            }
+        ];
+
+        // ARCHIVE DATA MODEL
+        const ARCHIVE_ITEMS = [
+            { id: 1, type: "photo", title: "დილა თბილისში", category: "ფოტო", location: "თბილისი", time: "07:30", img: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, type: "letter", title: "წერილი 2026-ს", category: "წერილები", location: "ანანური", quote: "„ზოგი დღე ისტორიად რჩება, როცა მას სწორ ადამიანებთან ერთად ატარებ.“" },
+            { id: 3, type: "audio", title: "არაგვის ხმაური", category: "ხმა", location: "ფასანაური", duration: "0:45" },
+            { id: 4, type: "video", title: "გუდაურის ნისლი", category: "ვიდეო", location: "გუდაური", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" },
+            { id: 5, type: "photo", title: "მყინვარწვერის გამოჩენა", category: "ფოტო", location: "ყაზბეგი", img: "https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&fit=crop&w=600&q=80" },
+            { id: 6, type: "letter", title: "მეგობრის სურვილი", category: "წერილები", location: "დარიალი", quote: "„24 ოქტომბრის დროით — სიყვარული მუდამ ჩვენთან იყოს.“" }
+        ];
+
+        // USER PASSPORT STATE (PERSISTED IN LOCALSTORAGE)
+        let passportState = localStorage.getItem('na24_passport') ? JSON.parse(localStorage.getItem('na24_passport')) : {
+            visited: ["300-aragveli", "ananuri"]
+        };
+
+        function savePassport() {
+            localStorage.setItem('na24_passport', JSON.stringify(passportState));
+        }
+
+        
+        // VIEW 1: HOMEPAGE TEMPLATE
+        function renderHome() {
+            return `
+            <div class="animate-fade-in space-y-24 pb-12">
+                <!-- CINEMATIC HERO SECTION -->
+                <section class="relative min-h-[85vh] flex items-center justify-center text-center px-4 overflow-hidden rounded-b-3xl border-b border-gold/30 bg-forest text-parchment">
+                    <div class="absolute inset-0 z-0 opacity-40 mix-blend-overlay bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=2000&q=80');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-forest via-forest/60 to-transparent"></div>
+                    
+                    <div class="relative z-10 max-w-4xl mx-auto space-y-6 pt-12">
+                        <div class="inline-block px-4 py-1.5 rounded-full border border-gold/50 bg-forest/80 text-gold font-mono text-xs tracking-widest uppercase">
+                            24.10.2026 • ექსპედიცია
+                        </div>
+
+                        <h1 class="font-georgian-serif text-4xl sm:text-6xl md:text-7xl font-light tracking-wide text-parchment leading-tight">
+                            N·A·24
+                        </h1>
+                        <p class="font-georgian-serif text-xl sm:text-2xl md:text-3xl font-normal text-gold italic">
+                            „24 ოქტომბრის დროით — სიყვარული“
+                        </p>
+                        <p class="text-sm sm:text-base text-parchment/80 tracking-widest uppercase">
+                            საქართველოს პატარა ექსპედიცია
+                        </p>
+
+                        <div class="w-24 h-[1px] bg-gold/50 mx-auto my-6"></div>
+
+                        <p class="font-georgian-serif text-lg sm:text-xl text-parchment/90 max-w-xl mx-auto leading-relaxed">
+                            ერთი დღე. ერთი გზა. ბევრი ადამიანი. ერთი ისტორია.
+                        </p>
+
+                        <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <a href="#/expedition" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gold hover:bg-gold-light text-forest font-semibold text-sm transition-all shadow-lg hover:shadow-gold/20 flex items-center justify-center gap-2">
+                                <span>ექსპედიციის ნახვა</span>
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                            <a href="#/24" class="w-full sm:w-auto px-8 py-3.5 rounded-full border border-gold/60 text-parchment hover:bg-gold/10 font-medium text-sm transition-all flex items-center justify-center gap-2">
+                                <span>24 — მოინდომე და შემომთავაზე</span>
+                            </a>
+                        </div>
+
+                        <div class="pt-12 text-xs text-parchment/60 font-serif italic">
+                            ყველაფერი ჯერ კიდევ წინ არის.
+                        </div>
+                    </div>
+
+                    <!-- Scroll Indicator -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-gold/60 animate-bounce">
+                        <i class="fa-solid fa-chevron-down text-lg"></i>
+                    </div>
+                </section>
+
+                <!-- SECTION 2: PHILOSOPHY STATEMENT -->
+                <section class="max-w-4xl mx-auto px-4 text-center space-y-6">
+                    <span class="text-xs font-mono text-gold uppercase tracking-widest">კონცეფცია</span>
+                    <h2 class="font-georgian-serif text-2xl sm:text-4xl text-charcoal font-normal leading-snug">
+                        ეს არ არის უბრალოდ დაბადების დღე.
+                    </h2>
+                    <div class="space-y-4 font-georgian-serif text-lg text-charcoal-muted leading-relaxed max-w-2xl mx-auto">
+                        <p>ეს არის ერთი დღე, რომელიც გზად უნდა გავიაროთ.</p>
+                        <p class="text-forest font-medium">თბილისიდან მთებისკენ.</p>
+                        <p>ადამიანებიდან ადამიანებისკენ. მოგონებებიდან ახალ მოგონებამდე.</p>
+                        <p class="pt-2 text-base text-charcoal-muted">
+                            24 ოქტომბერს ერთი დღე გვექნება. და გვინდა, ის უბრალოდ არ გავიდეს.
+                        </p>
+                    </div>
+                    <div class="pt-4">
+                        <a href="#/expedition" class="inline-flex items-center gap-2 text-wine font-semibold hover:underline text-sm tracking-wider uppercase">
+                            <span>დაიწყე მოგზაურობა</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- SECTION 3: MAP TEASER -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6">
+                    <div class="bg-parchment-dark rounded-2xl border border-gold/30 p-6 md:p-12 space-y-8 relative overflow-hidden">
+                        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gold/20 pb-6">
+                            <div>
+                                <span class="text-xs font-mono text-forest uppercase tracking-widest">მარშრუტი</span>
+                                <h3 class="font-georgian-serif text-3xl text-charcoal font-normal mt-1">საქართველოს პატარა ექსპედიცია</h3>
+                                <p class="text-sm text-charcoal-muted mt-1">ჩვენი გზა იწყება თბილისში და მთებისკენ მიდის.</p>
+                            </div>
+                            <a href="#/map" class="px-5 py-2.5 rounded-full bg-forest text-parchment hover:bg-forest-light text-xs font-medium transition-colors inline-flex items-center gap-2 self-start md:self-auto">
+                                <i class="fa-solid fa-map"></i>
+                                <span>ინტერაქტიული რუკის გახსნა</span>
+                            </a>
+                        </div>
+
+                        <!-- Route visual preview -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 pt-4">
+                            ${LOCATIONS_DATA.map(loc => `
+                                <a href="#/location/${loc.id}" class="group p-4 bg-parchment rounded-xl border border-gold/20 hover:border-gold transition-all text-center space-y-2 flex flex-col justify-between">
+                                    <span class="text-[10px] font-mono text-wine font-bold block">${loc.time}</span>
+                                    <h4 class="font-georgian-serif text-sm font-semibold text-charcoal group-hover:text-forest">${loc.name}</h4>
+                                    <span class="text-[11px] text-charcoal-muted italic block line-clamp-1">${loc.subtitle}</span>
+                                </a>
+                            `).join('')}
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 4: THE 24 IDEA -->
+                <section class="max-w-5xl mx-auto px-4">
+                    <div class="bg-forest text-parchment rounded-3xl p-8 sm:p-14 text-center relative overflow-hidden border border-gold/40 shadow-xl">
+                        <div class="absolute -right-12 -bottom-12 text-[180px] font-georgian-serif font-bold text-gold/10 select-none pointer-events-none">24</div>
+                        
+                        <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+                            <span class="text-7xl font-georgian-serif font-bold text-gold block">24</span>
+                            <h3 class="font-georgian-serif text-2xl sm:text-4xl text-parchment leading-tight">
+                                ამ დღეს მხოლოდ ერთი რამ არ არის დაგეგმილი.
+                            </h3>
+                            <p class="text-xl font-georgian-serif text-gold italic">შენ.</p>
+                            <p class="text-sm sm:text-base text-parchment/80 leading-relaxed font-light">
+                                თუ 24 ოქტომბერს გინდა ჩემთან დროის გატარება, შეგიძლია თავად შემომთავაზო, როგორ.
+                            </p>
+                            <div class="pt-4">
+                                <a href="#/24" class="inline-block px-8 py-3.5 rounded-full bg-gold hover:bg-gold-light text-forest font-semibold text-sm transition-all shadow-lg">
+                                    24 — მოინდომე და შემომთავაზო
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 5: LEAVE YOUR TRACE -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
+                    <div class="text-center space-y-3">
+                        <h3 class="font-georgian-serif text-2xl sm:text-3xl text-charcoal">
+                            ყველა მოგზაურობას თავისი მემატიანე ჰყავს.
+                        </h3>
+                        <p class="text-sm text-charcoal-muted max-w-xl mx-auto">
+                            შეგიძლია დატოვო ფოტო, ვიდეო, წერილი, ერთი წინადადება, ხმა ან უბრალოდ პატარა მოგონება.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <a href="#/trace" class="p-6 bg-parchment border border-gold/30 rounded-2xl hover:border-gold hover:shadow-md transition-all group text-center space-y-4">
+                            <div class="w-12 h-12 rounded-full bg-parchment-dark text-forest flex items-center justify-center mx-auto text-xl group-hover:bg-forest group-hover:text-parchment transition-colors">
+                                📷
+                            </div>
+                            <h4 class="font-georgian-serif font-semibold text-lg text-charcoal">ფოტო</h4>
+                            <p class="text-xs text-charcoal-muted">დატოვე ვიზუალური კადრი ექსპედიციის ალბომისთვის.</p>
+                        </a>
+
+                        <a href="#/trace" class="p-6 bg-parchment border border-gold/30 rounded-2xl hover:border-gold hover:shadow-md transition-all group text-center space-y-4">
+                            <div class="w-12 h-12 rounded-full bg-parchment-dark text-wine flex items-center justify-center mx-auto text-xl group-hover:bg-wine group-hover:text-parchment transition-colors">
+                                🎥
+                            </div>
+                            <h4 class="font-georgian-serif font-semibold text-lg text-charcoal">ვიდეო</h4>
+                            <p class="text-xs text-charcoal-muted">მოკლე მოძრავი კადრი მოგზაურობის დინამიკიდან.</p>
+                        </a>
+
+                        <a href="#/trace" class="p-6 bg-parchment border border-gold/30 rounded-2xl hover:border-gold hover:shadow-md transition-all group text-center space-y-4">
+                            <div class="w-12 h-12 rounded-full bg-parchment-dark text-gold flex items-center justify-center mx-auto text-xl group-hover:bg-gold group-hover:text-forest transition-colors">
+                                ✍️
+                            </div>
+                            <h4 class="font-georgian-serif font-semibold text-lg text-charcoal">წერილი</h4>
+                            <p class="text-xs text-charcoal-muted">ერთი წინადადება ან გულწრფელი ტექსტი მომავლისთვის.</p>
+                        </a>
+
+                        <a href="#/trace" class="p-6 bg-parchment border border-gold/30 rounded-2xl hover:border-gold hover:shadow-md transition-all group text-center space-y-4">
+                            <div class="w-12 h-12 rounded-full bg-parchment-dark text-forest flex items-center justify-center mx-auto text-xl group-hover:bg-forest group-hover:text-parchment transition-colors">
+                                🎙️
+                            </div>
+                            <h4 class="font-georgian-serif font-semibold text-lg text-charcoal">ხმა</h4>
+                            <p class="text-xs text-charcoal-muted">ჩაწერე ხმოვანი გზავნილი ან გარემოს ხმაური.</p>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- SECTION 6: TIME CAPSULE -->
+                <section class="max-w-4xl mx-auto px-4">
+                    <div class="border-2 border-dashed border-gold/50 rounded-2xl p-8 text-center space-y-4 bg-parchment-dark/50">
+                        <i class="fa-solid fa-hourglass-half text-2xl text-gold"></i>
+                        <h3 class="font-georgian-serif text-2xl text-charcoal">დროის კაფსულა 24</h3>
+                        <p class="text-sm text-charcoal-muted max-w-lg mx-auto">
+                            ზოგი რამ იმ დღეს უნდა თქვა. ზოგი რამ — წლების შემდეგ უნდა წაიკითხო.
+                        </p>
+                        <div class="pt-2">
+                            <button onclick="openTimeCapsuleModal()" class="px-6 py-2.5 rounded-full border border-forest text-forest hover:bg-forest hover:text-parchment text-xs font-semibold tracking-wider transition-colors">
+                                კაფსულა იხსნება 24.10.2026 • გახსენი
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 7: FINAL HOMEPAGE CTA -->
+                <section class="relative h-96 rounded-3xl overflow-hidden max-w-7xl mx-auto px-4 flex items-center justify-center text-center text-parchment">
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80');"></div>
+                    <div class="absolute inset-0 bg-charcoal/70"></div>
+                    
+                    <div class="relative z-10 space-y-6 max-w-xl">
+                        <h3 class="font-georgian-serif text-3xl sm:text-5xl font-light">მზად ხარ?</h3>
+                        <p class="font-georgian-serif text-xl text-gold italic">მაშინ წავიდეთ.</p>
+                        <div class="flex flex-wrap justify-center gap-4 pt-4">
+                            <a href="#/expedition" class="px-8 py-3 rounded-full bg-gold text-forest font-semibold text-xs uppercase tracking-wider hover:bg-gold-light transition-colors">ექსპედიცია</a>
+                            <a href="#/24" class="px-8 py-3 rounded-full bg-wine text-parchment font-semibold text-xs uppercase tracking-wider hover:bg-wine-light transition-colors">შემომთავაზე შენი 24</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            `;
+        }
+
+        // VIEW 2: EXPEDITION PAGE TEMPLATE
+        function renderExpedition() {
+            const timelineEvents = [
+                { time: "07:30", title: "კოორდინატორის მომზადება", desc: "დილის მზადება, მარშრუტის გადამოწმება." },
+                { time: "08:00", title: "სტუმრების შეკრება", desc: "შეკრების ადგილი თბილისში, პირველი ყავა და განწყობა." },
+                { time: "08:30", title: "გუნდების ფორმირება", desc: "ეკიპაჟების განაწილება და პასპორტების დარიგება." },
+                { time: "09:00", title: "გზა იწყება", desc: "თბილისიდან გასვლა ჩრდილოეთის მიმართულებით." },
+                { time: "09:20", title: "300 არაგველი", desc: "მეხსიერების გაჩერება და პირველი ფოტო-კვალი." },
+                { time: "10:50", title: "ანანური", desc: "ციხესიმაგრე, ტბის ხედი და ისტორიული ჩანაწერი." },
+                { time: "12:50", title: "ფასანაური", desc: "ჩემი ფესვები — სადილი, ხინკალი და ოჯახური გადმოცემები." },
+                { time: "14:15", title: "გუდაური", desc: "გაჩუმების წუთი — პანორამა და მთების სიჩუმე." },
+                { time: "15:20", title: "სტეფანწმინდა / ყაზბეგი", desc: "საქართველოს თავზე — გერგეტის ხედი და ფოტო-სესია." },
+                { time: "17:10", title: "დარიალი", desc: "კარიბჭე — ხეობის დათვალიერება." },
+                { time: "18:30", title: "ფინალური სუფრა", desc: "ერთი მაგიდა — დღის შთაბეჭდილებების გაზიარება." },
+                { time: "20:30+", title: "საღამოს გაგრძელება", desc: "მუსიკა, კოცონი, ისტორიები და ვარსკვლავები." }
+            ];
+
+            return `
+            <div class="animate-fade-in max-w-5xl mx-auto px-4 py-8 space-y-12">
+                <!-- HERO HEADER -->
+                <div class="text-center space-y-4 border-b border-gold/30 pb-8">
+                    <span class="px-3 py-1 rounded-full border border-gold text-gold text-xs font-mono">/expedition</span>
+                    <h1 class="font-georgian-serif text-3xl sm:text-5xl text-charcoal font-normal">საქართველოს პატარა ექსპედიცია</h1>
+                    <p class="font-mono text-wine text-sm font-semibold">24 ოქტომბერი, 2026</p>
+                    <p class="font-georgian-serif text-base sm:text-lg text-charcoal-muted max-w-2xl mx-auto leading-relaxed pt-2">
+                        ეს იქნება ერთი დღე გზაზე. დილით თბილისიდან გავალთ. გზად შევხვდებით ისტორიას, ფესვებს, მთებს, ერთმანეთს. საღამოს კი ერთ მაგიდასთან დავბრუნდებით.
+                    </p>
+                </div>
+
+                <!-- TIMELINE -->
+                <div class="relative border-l-2 border-gold/40 ml-4 sm:ml-32 pl-6 sm:pl-10 space-y-10 my-8">
+                    ${timelineEvents.map(evt => `
+                        <div class="relative group">
+                            <!-- Time badge on desktop -->
+                            <div class="hidden sm:block absolute -left-36 top-0 text-right w-24 font-mono text-sm font-bold text-wine">
+                                ${evt.time}
+                            </div>
+                            <!-- Marker Dot -->
+                            <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-parchment border-2 border-forest group-hover:bg-gold transition-colors"></div>
+                            
+                            <div class="bg-parchment border border-gold/20 rounded-xl p-5 hover:border-gold transition-all shadow-sm">
+                                <span class="sm:hidden text-xs font-mono text-wine font-bold block mb-1">${evt.time}</span>
+                                <h3 class="font-georgian-serif font-semibold text-lg text-charcoal">${evt.title}</h3>
+                                <p class="text-xs sm:text-sm text-charcoal-muted mt-1">${evt.desc}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- DYNAMIC TIMING NOTE -->
+                <div class="bg-parchment-dark border border-gold/30 rounded-xl p-4 text-center text-xs text-charcoal-muted font-serif italic">
+                    💡 დროები საორიენტაციოა და შესაძლოა შეიცვალოს გზის, ამინდისა და დღის რეალური დინამიკის მიხედვით.
+                </div>
+
+                <!-- LOCATIONS NAVIGATION CARDS -->
+                <div class="pt-8 space-y-6">
+                    <h3 class="font-georgian-serif text-2xl text-charcoal text-center">ექსპედიციის გაჩერებები</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${LOCATIONS_DATA.map(loc => `
+                            <div class="bg-parchment border border-gold/30 rounded-xl overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between">
+                                <div class="h-40 bg-cover bg-center relative" style="background-image: url('${loc.img}');">
+                                    <div class="absolute top-2 right-2 bg-forest text-parchment text-[10px] font-mono px-2 py-0.5 rounded">
+                                        ${loc.time}
+                                    </div>
+                                </div>
+                                <div class="p-5 space-y-2 flex-grow">
+                                    <h4 class="font-georgian-serif text-lg font-bold text-charcoal">${loc.name}</h4>
+                                    <p class="text-xs text-wine italic font-serif">${loc.subtitle}</p>
+                                    <p class="text-xs text-charcoal-muted line-clamp-2">${loc.story}</p>
+                                </div>
+                                <div class="p-4 border-t border-gold/10 bg-parchment-dark/30">
+                                    <a href="#/location/${loc.id}" class="block text-center text-xs font-semibold text-forest hover:text-wine uppercase tracking-wider">
+                                        ნახე ადგილი →
+                                    </a>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        // VIEW 3: INTERACTIVE MAP PAGE TEMPLATE
+        function renderMap() {
+            return `
+            <div class="animate-fade-in max-w-7xl mx-auto px-4 py-8 space-y-8">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-mono text-gold uppercase tracking-widest">ინტერაქტიული რუკა</span>
+                    <h1 class="font-georgian-serif text-3xl sm:text-4xl text-charcoal">საქართველოს პატარა ექსპედიცია</h1>
+                    <p class="text-sm text-charcoal-muted max-w-md mx-auto">დააჭირეთ მარშრუტის ნებისმიერ წერტილს დეტალების და მისიის სანახავად.</p>
+                </div>
+
+                <!-- STYLIZED GEORGIAN MAP CANVAS CONTAINER -->
+                <div class="relative bg-parchment-dark border-2 border-gold/40 rounded-3xl p-6 sm:p-12 overflow-hidden shadow-inner min-h-[500px] flex flex-col justify-between">
+                    <!-- Background Topo Lines Pattern Simulation -->
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#1B3B2B 1px, transparent 1px); background-size: 20px 20px;"></div>
+                    
+                    <!-- Route Visual Vector Line Overlay -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none stroke-wine/40" stroke-width="3" stroke-dasharray="6,6">
+                        <path d="M 150 420 Q 250 350 350 280 T 550 200 T 750 120" fill="none" />
+                    </svg>
+
+                    <!-- MAP MARKERS -->
+                    <div class="relative w-full h-[400px]">
+                        ${LOCATIONS_DATA.map((loc, idx) => `
+                            <button onclick="openLocationModal('${loc.id}')" 
+                                class="absolute transform -translate-x-1/2 -translate-y-1/2 group focus:outline-none" 
+                                style="left: ${loc.coords.x}; top: ${loc.coords.y};">
+                                <div class="relative flex items-center justify-center">
+                                    <div class="w-8 h-8 rounded-full bg-forest text-parchment font-mono text-xs flex items-center justify-center font-bold shadow-md map-marker-pulse group-hover:bg-wine transition-colors">
+                                        ${idx + 1}
+                                    </div>
+                                    <div class="absolute top-10 whitespace-nowrap bg-parchment/95 border border-gold/40 px-3 py-1 rounded-md shadow-md text-xs font-georgian-serif text-charcoal font-semibold group-hover:scale-105 transition-transform">
+                                        ${loc.name}
+                                    </div>
+                                </div>
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <!-- Map Legend -->
+                    <div class="relative z-10 flex flex-wrap items-center justify-between border-t border-gold/30 pt-4 text-xs font-mono text-charcoal-muted gap-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-forest"></span>
+                            <span>ექსპედიციის გაჩერება</span>
+                        </div>
+                        <div>
+                            <span>საწყისი: თბილისი → ფინალი: დარიალი</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROUTE LIST QUICK ACCESS -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    ${LOCATIONS_DATA.map(loc => `
+                        <div class="p-4 bg-parchment border border-gold/20 rounded-xl hover:border-gold flex items-center justify-between">
+                            <div>
+                                <h4 class="font-georgian-serif font-bold text-sm text-charcoal">${loc.name}</h4>
+                                <p class="text-xs text-wine italic">${loc.subtitle}</p>
+                            </div>
+                            <a href="#/location/${loc.id}" class="text-xs font-semibold text-forest hover:underline">
+                                ნახე →
+                            </a>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            `;
+        }
+
+        // VIEW 4: LOCATION DETAIL TEMPLATE (REUSABLE FOR ALL 6 STOPS)
+        function renderLocationDetail(slug) {
+            const loc = LOCATIONS_DATA.find(l => l.id === slug) || LOCATIONS_DATA[0];
+            const isVisited = passportState.visited.includes(loc.id);
+
+            return `
+            <div class="animate-fade-in max-w-4xl mx-auto px-4 py-8 space-y-8">
+                <!-- Navigation back -->
+                <a href="#/map" class="inline-flex items-center gap-2 text-xs font-semibold text-charcoal-muted hover:text-forest">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>რუკაზე დაბრუნება</span>
+                </a>
+
+                <!-- HERO COVER IMAGE -->
+                <div class="relative h-72 sm:h-96 rounded-3xl overflow-hidden border border-gold/30 shadow-lg">
+                    <img src="${loc.img}" alt="${loc.name}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6 text-parchment space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="px-3 py-0.5 rounded bg-wine text-parchment font-mono text-xs font-bold">${loc.time}</span>
+                            ${loc.tag ? `<span class="px-2 py-0.5 rounded bg-gold/80 text-forest font-mono text-[10px] font-bold">${loc.tag}</span>` : ''}
+                        </div>
+                        <h1 class="font-georgian-serif text-3xl sm:text-5xl font-bold">${loc.name}</h1>
+                        <p class="font-serif italic text-gold text-lg">${loc.subtitle}</p>
+                    </div>
+                </div>
+
+                <!-- STORY CONTENT -->
+                <div class="bg-parchment border border-gold/30 rounded-2xl p-6 sm:p-10 space-y-6">
+                    <h3 class="font-georgian-serif text-xl font-bold text-charcoal border-b border-gold/20 pb-3">ისტორია & კონცეფცია</h3>
+                    <p class="font-georgian-serif text-lg text-charcoal-muted leading-relaxed">
+                        ${loc.story}
+                    </p>
+
+                    <!-- SPECIAL INTERACTIVE ELEMENT FOR GUDAURI SILENCE TIMER -->
+                    ${loc.id === 'gudauri' ? `
+                        <div class="my-8 border-2 border-forest/30 rounded-2xl p-6 bg-parchment-dark text-center space-y-4">
+                            <i class="fa-solid fa-volume-xmark text-3xl text-forest"></i>
+                            <h4 class="font-georgian-serif font-bold text-xl text-charcoal">გაჩუმების წუთი</h4>
+                            <p class="text-xs text-charcoal-muted">60 წამი მთების სიჩუმის განსაცდელად.</p>
+                            <div id="silence-timer-display" class="font-mono text-4xl font-bold text-forest">01:00</div>
+                            <button id="silence-timer-btn" onclick="startSilenceTimer()" class="px-6 py-2.5 rounded-full bg-forest text-parchment text-xs font-semibold hover:bg-forest-light transition-colors">
+                                ერთი წუთით გაჩერდი
+                            </button>
+                        </div>
+                    ` : ''}
+
+                    <!-- SPECIAL INTERACTIVE ELEMENT FOR DARIALI COUNTDOWN -->
+                    ${loc.id === 'dariali' ? `
+                        <div class="my-8 border border-gold/40 rounded-2xl p-6 bg-forest text-parchment text-center space-y-3">
+                            <h4 class="font-georgian-serif text-xl text-gold">ფინალამდე დარჩენილია</h4>
+                            <div class="flex justify-center gap-4 font-mono text-2xl font-bold">
+                                <div><span id="cd-days">26"></span><p class="text-[10px] text-parchment/60 font-sans">დღე</p></div> :
+                                <div><span id="cd-hours">14</span><p class="text-[10px] text-parchment/60 font-sans">საათი</p></div> :
+                                <div><span id="cd-mins">35</span><p class="text-[10px] text-parchment/60 font-sans">წუთი</p></div>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- MISSION BOX -->
+                    <div class="bg-parchment-dark/70 border-l-4 border-gold p-4 rounded-r-xl space-y-2">
+                        <span class="text-xs font-mono text-gold uppercase tracking-wider font-bold">ლოკაციის მისია</span>
+                        <p class="font-georgian-serif text-sm font-semibold text-charcoal">${loc.mission}</p>
+                    </div>
+
+                    <!-- PASSPORT CHECKIN ACTION -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gold/20">
+                        <button onclick="togglePassportLocation('${loc.id}')" class="w-full sm:w-auto px-6 py-3 rounded-full ${isVisited ? 'bg-forest text-parchment' : 'border border-forest text-forest hover:bg-forest hover:text-parchment'} text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid ${isVisited ? 'fa-circle-check' : 'fa-passport'}"></i>
+                            <span>${isVisited ? 'ლოკაცია პასპორტში აღნიშნულია' : 'აღნიშნე პასპორტში'}</span>
+                        </button>
+
+                        <a href="#/trace" class="w-full sm:w-auto px-6 py-3 rounded-full bg-wine hover:bg-wine-light text-parchment text-xs font-semibold transition-colors text-center">
+                            ${loc.buttonText}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        // VIEW 5: 24 OFFER FORM TEMPLATE
+        function renderOffer24() {
+            return `
+            <div class="animate-fade-in max-w-3xl mx-auto px-4 py-8 space-y-8">
+                <div class="text-center space-y-4">
+                    <span class="w-12 h-12 rounded-full bg-wine text-parchment font-georgian-serif font-bold text-xl inline-flex items-center justify-center shadow-md">24</span>
+                    <h1 class="font-georgian-serif text-3xl sm:text-5xl text-charcoal">24 — მოინდომე და შემომთავაზე</h1>
+                    <p class="font-georgian-serif text-base text-charcoal-muted max-w-xl mx-auto leading-relaxed">
+                        24 ოქტომბერს ჩემი დღე მინდა შენთანაც გავიყო. თუ გინდა ჩემთან დროის გატარება, არ არის აუცილებელი უკვე დაგეგმილ პროგრამას მოერგო. შენ მოინდომე. შენ შემომთავაზე. დანარჩენს 24 ოქტომბერი გადაწყვეტს.
+                    </p>
+                </div>
+
+                <!-- PROPOSAL FORM -->
+                <form id="offer-form" onsubmit="handleOfferSubmit(event)" class="bg-parchment border border-gold/30 rounded-2xl p-6 sm:p-10 space-y-6 shadow-sm">
+                    <!-- Field 1: Name -->
+                    <div class="space-y-2">
+                        <label class="block font-georgian-serif text-sm font-bold text-charcoal">შენი სახელი *</label>
+                        <input type="text" required placeholder="მაგ: გიორგი" class="w-full px-4 py-3 rounded-xl border border-gold/30 bg-parchment-dark/40 focus:outline-none focus:border-forest text-sm">
+                    </div>
+
+                    <!-- Field 2: Start Time -->
+                    <div class="space-y-2">
+                        <label class="block font-georgian-serif text-sm font-bold text-charcoal">სასურველი დაწყების დრო (24 ოქტომბერი, 2026) *</label>
+                        <input type="time" required value="14:00" class="w-full px-4 py-3 rounded-xl border border-gold/30 bg-parchment-dark/40 focus:outline-none focus:border-forest text-sm">
+                    </div>
+
+                    <!-- Field 3: Duration Selection Chips -->
+                    <div class="space-y-2">
+                        <label class="block font-georgian-serif text-sm font-bold text-charcoal">ხანგრძლივობა *</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            ${["30 წუთი", "1 საათი", "2 საათი", "ნახევარი დღე", "მთელი დღე", "სხვა"].map((dur, i) => `
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="duration" value="${dur}" ${i===1 ? 'checked' : ''} class="peer sr-only">
+                                    <div class="px-4 py-2.5 rounded-xl border border-gold/30 bg-parchment-dark/30 text-xs font-semibold text-center text-charcoal peer-checked:bg-forest peer-checked:text-parchment peer-checked:border-forest transition-all">
+                                        ${dur}
+                                    </div>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Field 4: Idea Proposal -->
+                    <div class="space-y-2">
+                        <label class="block font-georgian-serif text-sm font-bold text-charcoal">რა გინდა, რომ ერთად გავაკეთოთ? *</label>
+                        <textarea required rows="4" placeholder="ყავა, გასეირნება, სადილი, ფოტო-გასეირნება, პატარა მოგზაურობა, მუსიკა, საუბარი, უცნაური იდეა..." class="w-full px-4 py-3 rounded-xl border border-gold/30 bg-parchment-dark/40 focus:outline-none focus:border-forest text-sm"></textarea>
+                    </div>
+
+                    <!-- Field 5: Location Options -->
+                    <div class="space-y-2">
+                        <label class="block font-georgian-serif text-sm font-bold text-charcoal">სად? *</label>
+                        <div class="space-y-2">
+                            ${[
+                                "შენს მიერ შეთავაზებული ადგილი",
+                                "ნინოსთან შეთანხმებული",
+                                "ჯერ არ ვიცი"
+                            ].map((locOpt, i) => `
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-gold/20 bg-parchment-dark/20 cursor-pointer">
+                                    <input type="radio" name="location_opt" value="${locOpt}" ${i===0 ? 'checked' : ''} class="accent-forest">
+                                    <span class="text-xs font-medium text-charcoal">${locOpt}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Field 6: Why This? -->
+                    <div class="space-y-2">
+                        <label class="block font-georgian-serif text-sm font-bold text-charcoal">რატომ ეს?</label>
+                        <input type="text" placeholder="მოკლე კომენტარი..." class="w-full px-4 py-3 rounded-xl border border-gold/30 bg-parchment-dark/40 focus:outline-none focus:border-forest text-sm">
+                    </div>
+
+                    <!-- Field 7: Consents -->
+                    <div class="space-y-3 pt-2 border-t border-gold/20">
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" required class="mt-1 accent-forest">
+                            <span class="text-xs text-charcoal-muted">თანახმა ვარ, რომ ჩემი იდეა ნინომ ნახოს.</span>
+                        </label>
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" class="mt-1 accent-forest">
+                            <span class="text-xs text-charcoal-muted">თანახმა ვარ, რომ ამ შეხვედრიდან ფოტო/ვიდეო მასალა გამოყენებული იყოს N·A·24-ის ციფრულ არქივში.</span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-4 rounded-xl bg-wine hover:bg-wine-light text-parchment font-semibold text-sm transition-colors shadow-md">
+                        შემომთავაზე ჩემი 24
+                    </button>
+                </form>
+            </div>
+            `;
+        }
+
+        // VIEW 6: CALENDAR PAGE TEMPLATE
+        function renderCalendar() {
+            return `
+            <div class="animate-fade-in max-w-4xl mx-auto px-4 py-8 space-y-8">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-mono text-gold uppercase tracking-widest">განრიგი</span>
+                    <h1 class="font-georgian-serif text-3xl sm:text-4xl text-charcoal">24-ის კალენდარი</h1>
+                    <p class="text-sm text-charcoal-muted">24 ოქტომბერი უკვე ივსება ადამიანებითა და იდეებით.</p>
+                </div>
+
+                <div class="bg-parchment border border-gold/30 rounded-2xl p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center justify-between border-b border-gold/20 pb-4">
+                        <span class="font-georgian-serif font-bold text-lg text-charcoal">24 ოქტომბერი, 2026</span>
+                        <span class="px-3 py-1 rounded-full bg-forest/10 text-forest text-xs font-mono font-bold">აქტიური</span>
+                    </div>
+
+                    <!-- Major Event Highlight -->
+                    <div class="p-5 rounded-xl bg-forest text-parchment space-y-2 shadow-md">
+                        <div class="flex justify-between text-xs text-gold font-mono">
+                            <span>07:30 - 20:30</span>
+                            <span>მთავარი ღონისძიება</span>
+                        </div>
+                        <h3 class="font-georgian-serif text-xl font-bold">საქართველოს პატარა ექსპედიცია</h3>
+                        <p class="text-xs text-parchment/80">თბილისი → ანანური → ფასანაური → გუდაური → ყაზბეგი → დარიალი</p>
+                    </div>
+
+                    <!-- Sample Hourly Slots -->
+                    <div class="space-y-3 pt-4">
+                        <h4 class="font-georgian-serif font-semibold text-sm text-charcoal">პირადი შეხვედრების სლოტები (სავარაუდო)</h4>
+                        ${[
+                            { time: "08:00", title: "დილის ყავა თბილისში", status: "დაკავებული" },
+                            { time: "12:00", title: "ღია სლოტი (24-ის შეთავაზება)", status: "თავისუფალი" },
+                            { time: "16:00", title: "ფოტო-გასეირნება ყაზბეგში", status: "დაკავებული" },
+                            { time: "21:00", title: "ღია სლოტი (საღამოს საუბრები)", status: "თავისუფალი" }
+                        ].map(slot => `
+                            <div class="flex items-center justify-between p-3 rounded-xl border border-gold/20 bg-parchment-dark/30 text-xs">
+                                <span class="font-mono font-bold text-wine w-16">${slot.time}</span>
+                                <span class="font-georgian-serif text-charcoal font-medium flex-grow">${slot.title}</span>
+                                <span class="px-2.5 py-1 rounded ${slot.status === 'თავისუფალი' ? 'bg-gold/20 text-forest font-bold' : 'bg-charcoal/10 text-charcoal-muted'} text-[10px]">
+                                    ${slot.status}
+                                </span>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <p class="text-[11px] text-charcoal-muted italic text-center pt-2">
+                        🔒 პირადი შეხვედრების დეტალები კონფიდენციალურია და საჯაროდ არ ფიქსირდება შეთანხმების გარეშე.
+                    </p>
+                </div>
+            </div>
+            `;
+        }
+
+        // VIEW 7: TRACE PAGE TEMPLATE
+        function renderTrace() {
+            return `
+            <div class="animate-fade-in max-w-4xl mx-auto px-4 py-8 space-y-8">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-mono text-wine uppercase tracking-widest">მემატიანე</span>
+                    <h1 class="font-georgian-serif text-3xl sm:text-4xl text-charcoal">დატოვე შენი კვალი</h1>
+                    <p class="text-sm text-charcoal-muted max-w-md mx-auto">ამ ისტორიაში სტუმარი მხოლოდ მაყურებელი არ არის. შენც შეგიძლია გახდე მისი ნაწილი.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Letter Experience -->
+                    <div class="bg-parchment border border-gold/30 rounded-2xl p-6 space-y-4 shadow-sm md:col-span-2">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">✍️</span>
+                            <div>
+                                <h3 class="font-georgian-serif font-bold text-lg text-charcoal">ერთი წინადადება მომავლისთვის</h3>
+                                <p class="text-xs text-charcoal-muted">რა გინდა, რომ ნინომ ამ დღიდან წლების შემდეგაც წაიკითხოს?</p>
+                            </div>
+                        </div>
+                        <textarea id="trace-letter-input" rows="3" placeholder="დაწერე შენი წინადადება აქ..." class="w-full px-4 py-3 rounded-xl border border-gold/30 bg-parchment-dark/30 text-sm focus:outline-none focus:border-forest"></textarea>
+                        <button onclick="saveTraceLetter()" class="px-6 py-2.5 rounded-full bg-forest text-parchment text-xs font-semibold hover:bg-forest-light transition-colors">
+                            შევინახოთ არქივში
+                        </button>
+                    </div>
+
+                    <!-- Audio Experience Simulation -->
+                    <div class="bg-parchment border border-gold/30 rounded-2xl p-6 space-y-4 shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🎙️</span>
+                            <h3 class="font-georgian-serif font-bold text-lg text-charcoal">მითხარი ხმაში</h3>
+                        </div>
+                        <p class="text-xs text-charcoal-muted">ჩაწერე მოკლე ხმოვანი გზავნილი ექსპედიციისთვის.</p>
+                        
+                        <div class="p-4 bg-parchment-dark/50 rounded-xl text-center space-y-3">
+                            <div class="flex justify-center items-center gap-1 h-8">
+                                <span class="w-1 bg-wine h-3 animate-pulse"></span>
+                                <span class="w-1 bg-wine h-6 animate-pulse"></span>
+                                <span class="w-1 bg-wine h-4 animate-pulse"></span>
+                                <span class="w-1 bg-wine h-7 animate-pulse"></span>
+                                <span class="w-1 bg-wine h-2 animate-pulse"></span>
+                            </div>
+                            <div class="flex justify-center gap-2">
+                                <button onclick="alert('ხმის ჩაწერა სიმულირებულია')" class="px-4 py-2 rounded-lg bg-wine text-parchment text-xs font-semibold">
+                                    <i class="fa-solid fa-microphone mr-1"></i> ჩაწერა
+                                </button>
+                                <button onclick="alert('შენახულია')" class="px-4 py-2 rounded-lg border border-gold text-charcoal text-xs font-semibold">
+                                    შენახვა
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Photo Upload Prototype -->
+                    <div class="bg-parchment border border-gold/30 rounded-2xl p-6 space-y-4 shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">📷</span>
+                            <h3 class="font-georgian-serif font-bold text-lg text-charcoal">ფოტოს ატვირთვა</h3>
+                        </div>
+                        <p class="text-xs text-charcoal-muted">გააზიარე კადრი, რომელიც ამ დღეს ასახავს.</p>
+                        
+                        <div class="border-2 border-dashed border-gold/40 rounded-xl p-6 text-center space-y-2 cursor-pointer hover:bg-parchment-dark/30 transition-colors" onclick="alert('ფოტოს ატვირთვა სიმულირებულია')">
+                            <i class="fa-solid fa-cloud-arrow-up text-2xl text-gold"></i>
+                            <p class="text-xs text-charcoal font-medium">აირჩიე ან გადმოათრიე ფოტო</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        // VIEW 8: PASSPORT PAGE TEMPLATE
+        function renderPassport() {
+            return `
+            <div class="animate-fade-in max-w-2xl mx-auto px-4 py-8 space-y-8">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-mono text-gold uppercase tracking-widest">ციფრული პასპორტი</span>
+                    <h1 class="font-georgian-serif text-3xl sm:text-4xl text-charcoal">მოგზაურის პასპორტი</h1>
+                </div>
+
+                <!-- STYLIZED PASSPORT CARD -->
+                <div class="bg-forest text-parchment border-2 border-gold rounded-3xl p-6 sm:p-10 space-y-6 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-9xl text-gold/10 font-serif font-bold pointer-events-none">N</div>
+                    
+                    <div class="flex justify-between items-start border-b border-gold/30 pb-4">
+                        <div>
+                            <span class="font-georgian-serif font-bold text-xl tracking-wider text-gold">N·A·24</span>
+                            <p class="text-[10px] text-parchment/70 font-mono">საქართველოს ექსპედიცია</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="px-3 py-1 rounded bg-gold text-forest font-mono text-xs font-bold">მოგზაური №017</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="font-georgian-serif text-sm font-semibold text-gold uppercase tracking-wider">გავლილი მარშრუტის პუნქტები:</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${LOCATIONS_DATA.map(loc => {
+                                const visited = passportState.visited.includes(loc.id);
+                                return `
+                                    <div class="flex items-center gap-3 p-2.5 rounded-xl border border-gold/20 bg-forest-light/40">
+                                        <i class="fa-solid ${visited ? 'fa-square-check text-gold' : 'fa-square text-parchment/30'} text-base"></i>
+                                        <div>
+                                            <p class="font-georgian-serif text-xs font-bold ${visited ? 'text-parchment' : 'text-parchment/50'}">${loc.name}</p>
+                                            <p class="text-[10px] text-gold/70">${loc.time}</p>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <!-- STAMP & QR CODE PLACEHOLDER -->
+                    <div class="pt-4 border-t border-gold/30 flex justify-between items-center">
+                        <div class="stamp-effect px-4 py-2 text-center rounded border-gold">
+                            <span class="font-mono text-[10px] text-gold block uppercase">დამოწმებულია</span>
+                            <span class="font-georgian-serif text-xs font-bold text-parchment">24.10.2026</span>
+                        </div>
+                        <div class="w-16 h-16 bg-parchment p-1 rounded-md flex items-center justify-center">
+                            <i class="fa-solid fa-qrcode text-charcoal text-4xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        // VIEW 9: ARCHIVE PAGE TEMPLATE
+        function renderArchive() {
+            return `
+            <div class="animate-fade-in max-w-7xl mx-auto px-4 py-8 space-y-12">
+                <div class="text-center space-y-3">
+                    <span class="text-xs font-mono text-gold uppercase tracking-widest">ციფრული არქივი</span>
+                    <h1 class="font-georgian-serif text-3xl sm:text-5xl text-charcoal">ეს უკვე ისტორიაა.</h1>
+                    <p class="text-sm text-charcoal-muted max-w-md mx-auto">გაიარე 24 ოქტომბერი თავიდან.</p>
+                </div>
+
+                <!-- FILTER CHIPS -->
+                <div class="flex flex-wrap justify-center gap-2">
+                    ${["ყველა", "ფოტო", "ვიდეო", "ხმა", "წერილები", "ადგილები"].map((cat, i) => `
+                        <button onclick="filterArchive('${cat}')" class="px-4 py-1.5 rounded-full border border-gold/30 ${i===0 ? 'bg-forest text-parchment' : 'bg-parchment text-charcoal hover:border-gold'} text-xs font-medium transition-colors">
+                            ${cat}
+                        </button>
+                    `).join('')}
+                </div>
+
+                <!-- MASONRY EDITORIAL GRID -->
+                <div id="archive-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    ${ARCHIVE_ITEMS.map(item => `
+                        <div class="bg-parchment border border-gold/30 rounded-2xl overflow-hidden hover:shadow-lg transition-all space-y-3 p-4">
+                            ${item.img ? `<img src="${item.img}" alt="${item.title}" class="w-full h-48 object-cover rounded-xl">` : ''}
+                            ${item.quote ? `<blockquote class="font-georgian-serif italic text-charcoal text-sm p-4 bg-parchment-dark/50 rounded-xl border-l-2 border-wine">${item.quote}</blockquote>` : ''}
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="px-2 py-0.5 rounded bg-gold/20 text-forest font-bold">${item.category}</span>
+                                <span class="font-mono text-charcoal-muted">${item.location}</span>
+                            </div>
+                            <h4 class="font-georgian-serif font-bold text-base text-charcoal">${item.title}</h4>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- ONE TABLE SECTION -->
+                <section class="bg-parchment-dark border border-gold/30 rounded-3xl p-8 sm:p-12 text-center space-y-6">
+                    <h3 class="font-georgian-serif text-3xl text-charcoal">ერთი მაგიდა</h3>
+                    <p class="font-georgian-serif text-base text-charcoal-muted max-w-lg mx-auto">
+                        დღის ბოლოს ყველა გზა ერთ მაგიდასთან მოვიდა.
+                    </p>
+                    <div class="h-64 sm:h-80 rounded-2xl bg-cover bg-center border border-gold/30 shadow-inner" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80');"></div>
+                </section>
+
+                <!-- FINAL FILM SECTION -->
+                <section class="bg-forest text-parchment rounded-3xl p-8 sm:p-12 text-center space-y-6 border border-gold/40">
+                    <span class="text-xs font-mono text-gold uppercase">ვიდეო დოკუმენტი</span>
+                    <h3 class="font-georgian-serif text-3xl sm:text-4xl">24 ოქტომბერი — ფილმი</h3>
+                    <p class="font-georgian-serif italic text-gold">„ზოგი დღე ისტორიად რჩება.“</p>
+                    <button onclick="openVideoModal()" class="px-8 py-3.5 rounded-full bg-gold text-forest font-bold text-xs uppercase tracking-wider hover:bg-gold-light transition-colors">
+                        <i class="fa-solid fa-play mr-2"></i> დაიწყე ფილმი
+                    </button>
+                </section>
+
+                <!-- FINAL CINEMATIC ENDING SEQUENTIAL TEXT -->
+                <section class="bg-charcoal text-parchment rounded-3xl p-8 sm:p-16 text-center space-y-8 font-georgian-serif">
+                    <p class="text-lg text-parchment/60">დილით ეს უბრალოდ ცარიელი რუკა იყო.</p>
+                    <p class="text-xl text-parchment/80">ახლა უკვე ვიცით:</p>
+                    <p class="text-2xl text-gold font-bold">რუკა ადგილებით არ იქმნება. ის ადამიანებით იქმნება.</p>
+                    <p class="text-lg text-parchment/60">არ ვიცი, რამდენჯერ მოვყვებით ამ დღეს. მაგრამ ვიცი, რომ როცა მოვყვებით, ისევ 24 ოქტომბერი იქნება.</p>
+                    <div class="pt-6 border-t border-gold/20">
+                        <span class="font-bold text-2xl text-gold">N·A·24</span>
+                        <p class="text-xs text-parchment/50 font-sans mt-1">24 ოქტომბრის დროით — სიყვარული • 24.10.2026</p>
+                    </div>
+                </section>
+            </div>
+            `;
+        }
+
+        // VIEW 10: 404 PAGE TEMPLATE
+        function render404() {
+            return `
+            <div class="animate-fade-in max-w-md mx-auto px-4 py-20 text-center space-y-6">
+                <i class="fa-solid fa-compass-drafting text-5xl text-gold"></i>
+                <h1 class="font-georgian-serif text-3xl font-bold text-charcoal">ეს გზა ჯერ რუკაზე არ არის.</h1>
+                <p class="text-sm text-charcoal-muted">მაგრამ შეიძლება სადღაც მიგვიყვანოს.</p>
+                <a href="#/map" class="inline-block px-6 py-3 rounded-full bg-forest text-parchment text-xs font-semibold hover:bg-forest-light transition-colors">
+                    დაბრუნდი რუკაზე
+                </a>
+            </div>
+            `;
+        }
+
+        
+        // ROUTER SYSTEM
+        function handleRouting() {
+            const hash = window.location.hash || '#/';
+            const appRoot = document.getElementById('app-root');
+            const mobileDropdown = document.getElementById('mobile-dropdown');
+            
+            // Close mobile menu on page switch
+            if (mobileDropdown) mobileDropdown.classList.add('hidden');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (hash === '#/' || hash === '') {
+                appRoot.innerHTML = renderHome();
+            } else if (hash === '#/expedition') {
+                appRoot.innerHTML = renderExpedition();
+            } else if (hash === '#/map') {
+                appRoot.innerHTML = renderMap();
+            } else if (hash.startsWith('#/location/')) {
+                const slug = hash.replace('#/location/', '');
+                appRoot.innerHTML = renderLocationDetail(slug);
+            } else if (hash === '#/24') {
+                appRoot.innerHTML = renderOffer24();
+            } else if (hash === '#/calendar') {
+                appRoot.innerHTML = renderCalendar();
+            } else if (hash === '#/trace') {
+                appRoot.innerHTML = renderTrace();
+            } else if (hash === '#/passport') {
+                appRoot.innerHTML = renderPassport();
+            } else if (hash === '#/archive') {
+                appRoot.innerHTML = renderArchive();
+            } else {
+                appRoot.innerHTML = render404();
+            }
+        }
+
+        // INTERACTIVE MODALS & FUNCTIONS
+        function openLocationModal(locId) {
+            const loc = LOCATIONS_DATA.find(l => l.id === locId);
+            if (!loc) return;
+
+            const modal = document.getElementById('global-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.innerHTML = `
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-charcoal-muted hover:text-charcoal text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="space-y-4">
+                    <span class="px-2.5 py-1 rounded bg-wine text-parchment font-mono text-xs font-bold">${loc.time}</span>
+                    <h3 class="font-georgian-serif text-2xl font-bold text-charcoal">${loc.name}</h3>
+                    <p class="font-serif italic text-wine text-sm">${loc.subtitle}</p>
+                    <p class="text-xs text-charcoal-muted leading-relaxed">${loc.story}</p>
+                    <div class="pt-4 border-t border-gold/20 flex justify-between items-center">
+                        <a href="#/location/${loc.id}" onclick="closeModal()" class="px-5 py-2.5 rounded-full bg-forest text-parchment text-xs font-semibold hover:bg-forest-light">
+                            ნახე სრული გვერდი →
+                        </a>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function openTimeCapsuleModal() {
+            const modal = document.getElementById('global-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.innerHTML = `
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-charcoal-muted hover:text-charcoal text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="text-center space-y-4 py-4">
+                    <i class="fa-solid fa-lock text-4xl text-gold"></i>
+                    <h3 class="font-georgian-serif text-2xl font-bold text-charcoal">დროის კაფსულა ჩაკეტილია</h3>
+                    <p class="text-xs text-charcoal-muted max-w-sm mx-auto">
+                        კაფსულა შეიცავს ექსპედიციის მონაწილეთა ფარულ წერილებსა და ხმოვან ჩანაწერებს. ის ავტომატურად გაიხსნება 2026 წლის 24 ოქტომბერს.
+                    </p>
+                    <button onclick="closeModal()" class="px-6 py-2 rounded-full bg-forest text-parchment text-xs font-semibold">
+                        გავიგე
+                    </button>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function openVideoModal() {
+            const modal = document.getElementById('global-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.innerHTML = `
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-charcoal-muted hover:text-charcoal text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="space-y-4">
+                    <h3 class="font-georgian-serif text-xl font-bold text-charcoal">24 ოქტომბერი — ფილმი</h3>
+                    <div class="h-64 sm:h-80 rounded-xl bg-charcoal flex items-center justify-center text-parchment relative overflow-hidden">
+                        <i class="fa-solid fa-circle-play text-6xl text-gold/80 hover:text-gold cursor-pointer transition-transform hover:scale-110"></i>
+                        <span class="absolute bottom-4 text-xs font-mono text-parchment/60">თრეილერი • 02:45</span>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('global-modal').classList.add('hidden');
+        }
+
+        // FORM SUBMISSION & USER INTERACTIONS
+        function handleOfferSubmit(e) {
+            e.preventDefault();
+            const modal = document.getElementById('global-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.innerHTML = `
+                <div class="text-center space-y-4 py-6">
+                    <div class="w-16 h-16 rounded-full bg-forest text-parchment text-2xl flex items-center justify-center mx-auto">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+                    <h3 class="font-georgian-serif text-2xl font-bold text-charcoal">შენი 24 უკვე გზაშია.</h3>
+                    <p class="text-sm text-charcoal-muted">იდეა მივიღეთ. ახლა ის ნინოსთან მიდის.</p>
+                    <p class="font-serif italic text-wine">24 ოქტომბერს შევხვდებით.</p>
+                    <div class="pt-4 flex justify-center gap-3">
+                        <a href="#/" onclick="closeModal()" class="px-5 py-2 rounded-full bg-forest text-parchment text-xs font-semibold">დაბრუნდი მთავარზე</a>
+                        <a href="#/trace" onclick="closeModal()" class="px-5 py-2 rounded-full border border-gold text-charcoal text-xs font-semibold">დატოვე კიდევ ერთი კვალი</a>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function togglePassportLocation(locId) {
+            if (passportState.visited.includes(locId)) {
+                passportState.visited = passportState.visited.filter(id => id !== locId);
+            } else {
+                passportState.visited.push(locId);
+            }
+            savePassport();
+            handleRouting(); // Refresh view
+        }
+
+        function saveTraceLetter() {
+            const input = document.getElementById('trace-letter-input');
+            if (input && input.value.trim()) {
+                ARCHIVE_ITEMS.unshift({
+                    id: Date.now(),
+                    type: "letter",
+                    title: "ახალი წერილი",
+                    category: "წერილები",
+                    location: "ექსპედიცია",
+                    quote: `„${input.value.trim()}“`
+                });
+                alert('ეს წინადადება არქივში დარჩება.');
+                input.value = '';
+            }
+        }
+
+        function filterArchive(category) {
+            const grid = document.getElementById('archive-grid');
+            if (!grid) return;
+            
+            const items = category === "ყველა" ? ARCHIVE_ITEMS : ARCHIVE_ITEMS.filter(i => i.category === category);
+            
+            grid.innerHTML = items.map(item => `
+                <div class="bg-parchment border border-gold/30 rounded-2xl overflow-hidden hover:shadow-lg transition-all space-y-3 p-4">
+                    ${item.img ? `<img src="${item.img}" alt="${item.title}" class="w-full h-48 object-cover rounded-xl">` : ''}
+                    ${item.quote ? `<blockquote class="font-georgian-serif italic text-charcoal text-sm p-4 bg-parchment-dark/50 rounded-xl border-l-2 border-wine">${item.quote}</blockquote>` : ''}
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="px-2 py-0.5 rounded bg-gold/20 text-forest font-bold">${item.category}</span>
+                        <span class="font-mono text-charcoal-muted">${item.location}</span>
+                    </div>
+                    <h4 class="font-georgian-serif font-bold text-base text-charcoal">${item.title}</h4>
+                </div>
+            `).join('');
+        }
+
+        // GUDAURI SILENCE TIMER LOGIC
+        let timerInterval = null;
+        function startSilenceTimer() {
+            let seconds = 60;
+            const display = document.getElementById('silence-timer-display');
+            const btn = document.getElementById('silence-timer-btn');
+            if (!display || !btn) return;
+
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                seconds--;
+                const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+                const secs = String(seconds % 60).padStart(2, '0');
+                display.innerText = `${mins}:${secs}`;
+
+                if (seconds <= 0) {
+                    clearInterval(timerInterval);
+                    display.innerText = "00:00";
+                    alert('მადლობა სიჩუმისთვის.');
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50');
+                }
+            }, 1000);
+        }
+
+        // INITIALIZATION
+        window.addEventListener('load', () => {
+            // Hide initial loading screen after smooth intro
+            setTimeout(() => {
+                const loader = document.getElementById('loading-screen');
+                if (loader) {
+                    loader.classList.add('opacity-0');
+                    setTimeout(() => loader.style.display = 'none', 700);
+                }
+            }, 1200);
+
+            // Bind Hash Router
+            window.addEventListener('hashchange', handleRouting);
+            handleRouting(); // Initial run
+
+            // Mobile Menu Toggle logic
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileDropdown = document.getElementById('mobile-dropdown');
+            if (menuBtn && mobileDropdown) {
+                menuBtn.addEventListener('click', () => {
+                    mobileDropdown.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
